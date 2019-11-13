@@ -126,7 +126,12 @@ nav h1 a {
   letter-spacing: 0;
   margin: 10px;
   padding: 0 10px;
-  width: 200px;
+  width: 40%;
+}
+
+.filter-options select:active {
+  background-color: teal;
+  color: red;
 }
 
 /* ====================== Restaurant Listing ====================== */
@@ -143,9 +148,10 @@ nav h1 a {
   font-family: Arial,sans-serif;
   margin: 15px;
   min-height: 380px;
-  padding: 0 30px 25px;
+  padding: 30px 25px;
   text-align: left;
   width: 270px;
+  display: inline-block;
 }
 #restaurants-list .restaurant-img {
   background-color: #ccc;
@@ -273,3 +279,26 @@ nav h1 a {
 #restaurant-hours td {
   color: #666;
 }
+
+@media only screen and (max-width: 600px) {
+  #restaurants-list li {
+    width: 30%;
+    margin: 0;
+  }
+  #restaurants-list li img {
+    min-width: 30%;
+    max-width: 30%;
+  }
+}
+
+/* 
+@media only screen and (min-width: 601px) {
+  #restaurants-list li {
+    width: 30%;
+    margin: 0;
+  }
+  #restaurants-list li img {
+    min-width: 30%;
+    max-width: 30%;
+  }
+} */
