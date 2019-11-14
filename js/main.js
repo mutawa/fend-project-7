@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
   fetchNeighborhoods();
   fetchCuisines();
   setTabIndex();
+  setCopyRightsYear();
 });
 
 /**
@@ -202,11 +203,24 @@ addMarkersToMap = (restaurants = self.restaurants) => {
 } 
 
 setTabIndex = () => {
+  // get a reference of all available SELECT elements on the page
   let selects = document.querySelectorAll("select");
   
+  // iterate over them and give each one the attribute "tabindex=0"
   selects.forEach(select => {
     select.tabIndex = "0";
   });
 
-  selects[0].focus();
+  // optionally, set the focus to the first select element,
+  // or it can be done from HTML by the attribute 'autofocus'
+  // and that's why I commented the line below.
+  // If you can do it with native HTML, go for it,
+  // otherwise, JS is your last option (reduce dependency on JS)
+  
+  //selects[0].focus();
+}
+
+function setCopyRightsYear() {
+  let year = document.querySelector("#year");
+  year.textContent = (new Date()).getFullYear();
 }

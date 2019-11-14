@@ -6,6 +6,7 @@ var newMap;
  */
 document.addEventListener('DOMContentLoaded', (event) => {  
   initMap();
+  setCopyRightsYear();
 });
 
 /**
@@ -35,22 +36,6 @@ initMap = () => {
   });
 }  
  
-/* window.initMap = () => {
-  fetchRestaurantFromURL((error, restaurant) => {
-    if (error) { // Got an error!
-      console.error(error);
-    } else {
-      self.map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 16,
-        center: restaurant.latlng,
-        scrollwheel: false
-      });
-      fillBreadcrumb();
-      DBHelper.mapMarkerForRestaurant(self.restaurant, self.map);
-    }
-  });
-} */
-
 /**
  * Get current restaurant from page URL.
  */
@@ -148,19 +133,30 @@ fillReviewsHTML = (reviews = self.restaurant.reviews) => {
  */
 createReviewHTML = (review) => {
   const li = document.createElement('li');
-  const name = document.createElement('p');
-  name.innerHTML = review.name;
-  li.appendChild(name);
+  const top = document.createElement('div');
+  top.className = "review-top";
 
-  const date = document.createElement('p');
+  const name = document.createElement('div');
+  name.className = "review-name";
+  name.innerHTML = review.name;
+  
+  const date = document.createElement('div');
+  date.className = "review-date";
   date.innerHTML = review.date;
-  li.appendChild(date);
+
+
+  
+  top.appendChild(name);
+  top.appendChild(date);
+  li.appendChild(top);
 
   const rating = document.createElement('p');
+  rating.className = "review-rating";
   rating.innerHTML = `Rating: ${review.rating}`;
   li.appendChild(rating);
 
   const comments = document.createElement('p');
+  comments.className = "review-comments";
   comments.innerHTML = review.comments;
   li.appendChild(comments);
 
@@ -191,4 +187,10 @@ getParameterByName = (name, url) => {
   if (!results[2])
     return '';
   return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
+
+
+function setCopyRightsYear() {
+  let year = document.querySelector("#year");
+  year.textContent = (new Date()).getFullYear();
 }
