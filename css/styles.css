@@ -228,11 +228,12 @@ nav h1 a {
 }
 .inside #map-container {
   background: blue none repeat scroll 0 0;
+  grid-area: map;
 
 }
 .inside #map {
   background-color: darkseagreen;
-  
+  /* height: 100%; */
   width: 100%;
 }
 .inside #footer {
@@ -266,6 +267,12 @@ nav h1 a {
   text-align: center;
   text-transform: uppercase;
 	
+}
+.inside #restaurant-container {
+  grid-area: info;
+}
+.inside #reviews-container {
+  grid-area: reviews;
 }
 #restaurant-container, #reviews-container {
   border-bottom: 1px solid #d9d9d9;
@@ -368,21 +375,19 @@ nav h1 a {
     text-align: left;
   }
 
+  .inside #map-container {
+    min-height: 400px;
+  }
+  .inside #map {
+    height: 100%;
+  }
 
   .inside #maincontent {
     grid-template-columns: 1fr;
-  }
-  .inside #restaurant-container {
-    grid-column: 1/2;
-    grid-row: 2/3;
-  }
-  .inside #map {
-    grid-column: 1/2;
-    grid-row: 1/2;
-  }
-  .inside #reviews-container {
-    grid-column: 1/2;
-    grid-row: 3/4;
+    grid-template-areas: "map"
+                         "info"
+                         "reviews"
+                        ;
   }
 
 }
@@ -391,35 +396,19 @@ nav h1 a {
   
   .inside #maincontent {
     grid-template-columns: 1fr 1fr;
+    grid-template-areas: "info map"
+                         "info map"
+                         "reviews reviews"
+                        ;
   }
-  .inside #restaurant-container {
-    grid-column: 1/2;
-    grid-row: 1/2;
-  }
-  .inside #map {
-    grid-column: 2/3;
-    grid-row: 1/2;
-  }
-  .inside #reviews-container {
-    grid-column: 1/3;
-  }
+  
 }
 
 
 @media only screen and (min-width: 1201px)  {
   .inside #maincontent {
     grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas: "info reviews map";
   }
-  .inside #restaurant-container {
-    grid-column: 1/2;
-    grid-row: 1/2;
-  }
-  .inside #map {
-    grid-column: 2/3;
-    grid-row: 1/2;
-  }
-  .inside #reviews-container {
-    grid-column: 3/4;
-    grid-row: 1/2;
-  }
+  
 }
