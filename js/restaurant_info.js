@@ -126,8 +126,10 @@ fillReviewsHTML = (reviews = self.restaurant.reviews) => {
     return;
   }
   const ul = document.getElementById('reviews-list');
+  let count = 0;
   reviews.forEach(review => {
-    ul.appendChild(createReviewHTML(review));
+    count += 1;
+    ul.appendChild(createReviewHTML(review, count, reviews.length));
   });
   container.appendChild(ul);
 }
@@ -135,8 +137,12 @@ fillReviewsHTML = (reviews = self.restaurant.reviews) => {
 /**
  * Create review HTML and add it to the webpage.
  */
-createReviewHTML = (review) => {
+createReviewHTML = (review, count, total) => {
   const li = document.createElement('li');
+  li.tabIndex = 0;
+  li.setAttribute("aria-label", `review ${count} of ${total} by ${review.name} on ${review.date}`);
+
+
   const top = document.createElement('div');
   top.className = "review-top";
 
@@ -162,6 +168,7 @@ createReviewHTML = (review) => {
   const comments = document.createElement('p');
   comments.className = "review-comments";
   comments.innerHTML = review.comments;
+  comments.tabIndex = 0;
   li.appendChild(comments);
 
   return li;
