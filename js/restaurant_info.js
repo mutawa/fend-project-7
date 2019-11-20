@@ -76,10 +76,11 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
 
   const image = document.getElementById('restaurant-img');
   image.className = 'restaurant-img';
-  image.alt = restaurant.name;
+  image.alt = "A Photo of " + restaurant.name;
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
 
   const cuisine = document.getElementById('restaurant-cuisine');
+  cuisine.setAttribute("aria-label","Cuisine Type: " + restaurant.cuisine_type );
   cuisine.innerHTML = restaurant.cuisine_type;
 
   // fill operating hours
@@ -95,9 +96,25 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
  */
 fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hours) => {
   const hours = document.getElementById('restaurant-hours');
+  const header = document.createElement("thead");
+  const tr = document.createElement("tr");
+  const col1 = document.createElement("th");
+  const col2 = document.createElement("th");
+  
+  col1.textContent = "Day";
+  col2.textContent = "Opening Hours";
+  tr.appendChild(col1);
+  tr.appendChild(col2);
+  header.appendChild(tr);
+  hours.appendChild(header); 
   for (let key in operatingHours) {
     const row = document.createElement('tr');
-
+    row.tabIndex = 0;
+    // for screen readers: speak [Monday 5:30pm to 12:00 pm] instead of [Monday 5:30pm 12:00pm]
+    // we need to replace the dash [-] with the word [to] so that the listener understands
+    // that we are talking about a period, since visually it's clear, but not clear when spoken.
+    const speech = key + " " + (operatingHours[key]).replace("-", "to");
+    row.setAttribute("aria-label", speech);
     const day = document.createElement('td');
     day.innerHTML = key;
     row.appendChild(day);
@@ -115,7 +132,8 @@ fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hours) => 
  */
 fillReviewsHTML = (reviews = self.restaurant.reviews) => {
   const container = document.getElementById('reviews-container');
-  const title = document.createElement('h2');
+  const title = document.createElement('h3');
+  
   title.innerHTML = 'Reviews';
   container.appendChild(title);
 
@@ -140,7 +158,7 @@ fillReviewsHTML = (reviews = self.restaurant.reviews) => {
 createReviewHTML = (review, count, total) => {
   const li = document.createElement('li');
   li.tabIndex = 0;
-  li.setAttribute("aria-label", `review ${count} of ${total} by ${review.name} on ${review.date}`);
+  li.setAttribute("aria-label", `review ${count} of ${total} by ${review.name} on ${review.date}. Rating: ${review.rating}`);
 
 
   const top = document.createElement('div');
@@ -180,6 +198,7 @@ createReviewHTML = (review, count, total) => {
 fillBreadcrumb = (restaurant=self.restaurant) => {
   const breadcrumb = document.getElementById('breadcrumb');
   const li = document.createElement('li');
+  li.setAttribute("role","tab");
   li.innerHTML = restaurant.name;
   breadcrumb.appendChild(li);
 }

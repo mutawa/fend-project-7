@@ -1,4 +1,4 @@
-const cacheName = "v2";
+const cacheName = "v2.2.1";
 
 // const cacheAssets = [
 //     'index.html',
@@ -74,6 +74,8 @@ self.addEventListener("fetch", e => {
             });
             return res;
         })
-        .catch(err => chaches.match(e.request).then(res => res))
+        .catch(() => {
+            return caches.match(e.request).then(res => res)
+        })
     );
 });

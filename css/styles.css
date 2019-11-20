@@ -32,10 +32,14 @@ a:hover, a:focus {
 a img{
 	border: none 0px #fff;
 }
-h1, h2, h3, h4, h5, h6 {
+
+h2 {
+  font-size: 1rem;
+}
+/* h1, h2, h3, h4, h5, h6 {
   font-family: Arial, Helvetica, sans-serif;
   margin: 0 0 20px;
-}
+} */
 article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
 	display: block;
 }
@@ -69,7 +73,7 @@ nav {
 
 nav h1 a {
   color: #fff;
-  font-size: 1.4em;
+  font-size: 1em;
   font-weight: 200;
   letter-spacing: minmax(0.1rem, 3rem);
   text-transform: uppercase;
@@ -348,6 +352,7 @@ nav h1 a {
 .review-top .review-date { 
   text-align: right;
   color: #aaa;
+  font-size: 0.65em;
   /* margin-right: -2em; */
 }
 
